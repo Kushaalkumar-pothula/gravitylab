@@ -1,4 +1,4 @@
-anode/*.so
-anode/*.c
+astrobody/*.so
+astrobody/*.c
 
 build/
