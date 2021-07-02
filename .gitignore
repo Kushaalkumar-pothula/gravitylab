@@ -1,0 +1,4 @@
+anode/*.so
+anode/*.c
+
+build/
