@@ -1,10 +1,12 @@
-from solvers import acceleration
+from solvers import acceleration, euler_cromer, leapfrog
 import numpy as np
 
 pos = np.random.uniform(0.0,10.0,(2,3))
+vel = np.random.uniform(0.0,10.0,(2,3))
 m = np.random.uniform(0.0,10.0,(2))
 
-for _ in range(10):
+for _ in range(100):
     a = acceleration(pos,m)
-    print(a)
-    print(f"Type of a = {type(a)}")
+    pos = leapfrog(pos, vel, a, m)
+    print(pos)
+    
