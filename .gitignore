@@ -1,4 +1,4 @@
-astrobody/*.so
-astrobody/*.c
-astrobody/__pycache__/
+gravitylab/*.so
+gravitylab/*.c
+gravitylab/__pycache__/
 build/

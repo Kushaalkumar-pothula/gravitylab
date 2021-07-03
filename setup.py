@@ -3,6 +3,6 @@ from Cython.Build import cythonize
 import numpy
 
 setup(
-    ext_modules=cythonize("astrobody/solvers.pyx"),
+    ext_modules=cythonize("gravitylab/solvers.pyx"),
     include_dirs=[numpy.get_include()]
 )
