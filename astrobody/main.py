@@ -1,3 +1,10 @@
-from solvers import add
+from solvers import acceleration
+import numpy as np
 
-print(add(4,5))
+pos = np.random.uniform(0.0,10.0,(2,3))
+m = np.random.uniform(0.0,10.0,(2))
+
+for _ in range(10):
+    a = acceleration(pos,m)
+    print(a)
+    print(f"Type of a = {type(a)}")
