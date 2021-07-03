@@ -2,3 +2,4 @@ gravitylab/__pycache__/
 gravitylab/*.c
 gravitylab/*.so
 build/
+*.png
