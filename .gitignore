@@ -1,5 +1,4 @@
-gravitylab/*.so
-gravitylab/*.c
 gravitylab/__pycache__/
-
+gravitylab/*.c
+gravitylab/*.so
 build/
