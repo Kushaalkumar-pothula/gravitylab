@@ -1,11 +1,11 @@
-import numpy as np
+#cython: language_level=3
+
 cimport numpy as np
+import numpy as np
 
-DTYPE = np.float64
-
-def acceleration(DTYPE[:,:] pos, DTYPE[:] mass):
+def acceleration(np.ndarray[np.float64_t, ndim=2] pos, np.ndarray[np.float64_t, ndim=1] mass):
     cdef int N = pos.shape[0]
-    cdef DTYPE [:,:] acc = np.zeros((N,3),dtype=DTYPE)
+    cdef np.ndarray[np.float64_t, ndim=2] acc = np.zeros((N,3),dtype="float64")
 
     cdef double soft = 1e-4
     cdef G = 6.673e-11
