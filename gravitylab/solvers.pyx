@@ -15,9 +15,17 @@ def acceleration(np.ndarray[np.float64_t, ndim=2] pos, np.ndarray[np.float64_t, 
     cdef double dy
     cdef double dz
 
+    # Accelerations
+    cdef double ax = 0.0
+    cdef double ay = 0.0
+    cdef double az = 0.0
+
+
     # Total separation vectors
-    cdef double r2
-    cdef double invr3
+    cdef double r
+
+    # Mass
+    cdef mj
 
     # Acceleration calculation loop
     for i in range(N):
@@ -25,21 +33,25 @@ def acceleration(np.ndarray[np.float64_t, ndim=2] pos, np.ndarray[np.float64_t, 
             # Remove gravitational self forces
             if i==j:
                 continue
-            # Calculate pairwise separations
+            # Calculate pairwise separation vectors
             dx = pos[j,0] - pos[i,0]
             dy = pos[j,1] - pos[i,1]
             dz = pos[j,2] - pos[i,2]
 
-            # r^2
-            r2 = dx**2 + dy**2 + dz**2 + soft**2
+            # Mass
+            mj = mass[j]
 
-            # Total separation
-            invr3 = r2**(-1.5)
+            # Separation magnitude
+            r = np.sqrt(dx**2 + dy**2 + dz**2 + soft**2)
 
             # Calculate accelerations in each dimension
-            acc[i,0] += G * dx * invr3 * mass[j]
-            acc[i,1] += G * dy * invr3 * mass[j]
-            acc[i,1] += G * dz * invr3 * mass[j]
+            ax += -1 * G * mj/r**3*dx
+            ay += -1 * G * mj/r**3*dy
+            az += -1 * G * mj/r**3*dz
+
+            acc[i,0] = ax
+            acc[i,1] = ay
+            acc[i,2] = az
 
     return np.asarray(acc)
 
