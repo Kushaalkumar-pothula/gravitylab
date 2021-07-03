@@ -22,7 +22,7 @@ def acceleration(np.ndarray[np.float64_t, ndim=2] pos, np.ndarray[np.float64_t, 
     # Acceleration calculation loop
     for i in range(N):
         for j in range(N):
-            # Remove self forces
+            # Remove gravitational self forces
             if i==j:
                 continue
             # Calculate pairwise separations
