@@ -75,4 +75,4 @@ def leapfrog(np.ndarray[np.float64_t, ndim=2] pos, np.ndarray[np.float64_t, ndim
     acc = acceleration(pos, mass)
     vel += acc * dt/2
 
-    return pos
+    return pos, acc
