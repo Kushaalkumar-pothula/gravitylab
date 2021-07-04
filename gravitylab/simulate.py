@@ -2,7 +2,7 @@ from solvers import acceleration, euler_cromer, leapfrog
 import numpy as np
 import matplotlib.pyplot as plt
 
-N = 2
+N = 20
 
 pos  = np.random.randn(N,3)
 vel  = np.random.randn(N,3)
