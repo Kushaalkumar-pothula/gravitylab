@@ -4,8 +4,10 @@ cimport numpy as np
 import numpy as np
 
 def acceleration(np.ndarray[np.float64_t, ndim=2] pos, np.ndarray[np.float64_t, ndim=1] mass):
-    cdef int N = pos.shape[0] # Numner of bodies   
-    cdef np.float64_t [:,:] acc = np.zeros((N,3),dtype="float64") # Memoryview for acceleration
+    cdef int N = pos.shape[0] # Number of bodies   
+
+    # Memoryview for acceleration
+    cdef np.float64_t [:,:] acc = np.zeros((N,3),dtype="float64")
 
     cdef double soft = 1e-4 # Softening length
     cdef G = 6.673e-11 # Gravitational constant
@@ -33,14 +35,16 @@ def acceleration(np.ndarray[np.float64_t, ndim=2] pos, np.ndarray[np.float64_t, 
             dy = pos[j,1] - pos[i,1]
             dz = pos[j,2] - pos[i,2]
 
+            # Vector magnitude of separation vector
             r = dx**2 + dy**2 + dz**2
 
             # Mass
             mj = mass[j]
 
-            acc[i,0] += -1*G * mj * dx / (r**(3/2))
-            acc[i,1] += -1*G * mj * dy / (r**(3/2))
-            acc[i,2] += -1*G * mj * dz / (r**(3/2))
+            # Calculate accelerations
+            acc[i,0] += -1 * G * mj * dx / (r**(3/2))
+            acc[i,1] += -1 * G * mj * dy / (r**(3/2))
+            acc[i,2] += -1 * G * mj * dz / (r**(3/2))
 
     return np.asarray(acc)
 
