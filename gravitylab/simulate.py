@@ -4,20 +4,15 @@ import matplotlib.pyplot as plt
 
 N = 2
 
-r1=[-0.5,0,0] #m
-r2=[0.5,0,0] #m
-
-v1=[0.01,0.01,0] #m/s
-v2=[-0.05,0,-0.1] #m/s
-
-pos = np.vstack((r1,r2))
-vel = np.vstack((v1,v2))
-m = np.array([1.1*2e30, 0.907*2e30])
+pos  = np.random.randn(N,3)
+vel  = np.random.randn(N,3)
+m = np.ones(N)
 
 pos_lst = []
+acc = acceleration(pos, m)
+
 for _ in range(500):
-    a = acceleration(pos,m)
-    pos = leapfrog(pos, vel, a, m)
+    pos, acc = leapfrog(pos, vel, acc, m)
     pos_lst.append(pos.copy())
     
 pos_arr = np.vstack(pos_lst)
