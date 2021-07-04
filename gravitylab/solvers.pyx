@@ -41,14 +41,9 @@ def acceleration(np.ndarray[np.float64_t, ndim=2] pos, np.ndarray[np.float64_t, 
             # Mass
             mj = mass[j]
 
-            ax = -1*G * mj * dx / ((dx**2 + dy**2 + dz**2)**(3/2))
-            ay = -1*G * mj * dy / ((dx**2 + dy**2 + dz**2)**(3/2))
-            az = -1*G * mj * dz / ((dx**2 + dy**2 + dz**2)**(3/2))
-
-
-            acc[i,0] = ax
-            acc[i,1] = ay
-            acc[i,2] = az
+            acc[i,0] = -1*(G * mj * dx / ((dx**2 + dy**2 + dz**2)**(3/2)))
+            acc[i,1] = -1*(G * mj * dy / ((dx**2 + dy**2 + dz**2)**(3/2)))
+            acc[i,2] = -1*(G * mj * dz / ((dx**2 + dy**2 + dz**2)**(3/2)))
 
     return np.asarray(acc)
 
