@@ -41,13 +41,10 @@ def acceleration(np.ndarray[np.float64_t, ndim=2] pos, np.ndarray[np.float64_t, 
             # Mass
             mj = mass[j]
 
-            # Separation magnitude
-            r = np.sqrt(dx**2 + dy**2 + dz**2 + soft**2)
+            ax = -1*G * mj * dx / ((dx**2 + dy**2 + dz**2)**(3/2))
+            ay = -1*G * mj * dy / ((dx**2 + dy**2 + dz**2)**(3/2))
+            az = -1*G * mj * dz / ((dx**2 + dy**2 + dz**2)**(3/2))
 
-            # Calculate accelerations in each dimension
-            ax += -1 * G * mj/r**3*dx
-            ay += -1 * G * mj/r**3*dy
-            az += -1 * G * mj/r**3*dz
 
             acc[i,0] = ax
             acc[i,1] = ay
