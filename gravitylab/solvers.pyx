@@ -20,6 +20,8 @@ def acceleration(np.ndarray[np.float64_t, ndim=2] pos, np.ndarray[np.float64_t, 
     # Total separation vectors
     cdef double r
 
+    cdef double tmp
+
     # Mass
     cdef mj
 
@@ -37,14 +39,17 @@ def acceleration(np.ndarray[np.float64_t, ndim=2] pos, np.ndarray[np.float64_t, 
 
             # Vector magnitude of separation vector
             r = dx**2 + dy**2 + dz**2
+            r = np.sqrt(r)
 
             # Mass
             mj = mass[j]
 
+            tmp = G * mj * r**3
+
             # Calculate accelerations
-            acc[i,0] += -1 * G * mj * dx / (r**(3/2))
-            acc[i,1] += -1 * G * mj * dy / (r**(3/2))
-            acc[i,2] += -1 * G * mj * dz / (r**(3/2))
+            acc[i,0] += tmp * dx
+            acc[i,1] += tmp * dy
+            acc[i,2] += tmp * dz
 
     return np.asarray(acc)
 
