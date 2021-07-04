@@ -1,3 +1,4 @@
+from matplotlib import colors
 from solvers import acceleration, euler_cromer, leapfrog
 import numpy as np
 import matplotlib.pyplot as plt
@@ -31,11 +32,11 @@ for _ in range(Nt):
 pos_arr = np.vstack(pos_lst)
 
 # Plot all positions
-plt.scatter(pos_arr[:,0], pos_arr[:,1])
+plt.scatter(pos_arr[:,0], pos_arr[:,1], color='blue', alpha = 0.3)
 
 # Plot the last two positions, to distinguish between attraction and repulsion
-plt.scatter(pos_arr[0,0], pos_arr[0,1], color='r')
-plt.scatter(pos_arr[-1,0], pos_arr[-1,1], color='r')
+plt.scatter(pos_arr[-1,0], pos_arr[-1,1], color='red')
+plt.scatter(pos_arr[0,0], pos_arr[1,1], color='green')
 
 # Save figure
 plt.savefig("test.png")
