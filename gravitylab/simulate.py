@@ -1,5 +1,5 @@
 from matplotlib import colors
-from solvers import acceleration, euler_cromer, leapfrog
+from solvers import acceleration, euler_cromer, leapfrog, separation
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -20,10 +20,13 @@ pos_lst = []
 # Calculate initial acceleration
 acc = acceleration(pos, m)
 
+print("Separation test:")
 # Run simulation
 for _ in range(Nt):
     # Calculate positions and get new acceleration values
     pos, acc = leapfrog(pos, vel, acc, m)
+    r, dx = separation(pos[0,:], pos[1,:])
+    print(r)
 
     # Add positions to a list
     pos_lst.append(pos.copy())
