@@ -3,25 +3,24 @@
 cimport numpy as np
 import numpy as np
 
+
 def acceleration(np.ndarray[np.float64_t, ndim=2] pos, np.ndarray[np.float64_t, ndim=1] mass):
     cdef int N = pos.shape[0] # Number of bodies   
 
     # Memoryview for acceleration
     cdef np.float64_t [:,:] acc = np.zeros((N,3),dtype="float64")
+    cdef np.float64_t [:,:] pos_view = pos
+    cdef np.float64_t [:] mass_view = mass
 
     cdef double soft = 1e-4 # Softening length
     cdef G = 6.673e-11 # Gravitational constant
-
     # Pairwise separations
     cdef double dx
     cdef double dy
     cdef double dz
-
     # Total separation vectors
     cdef double r
-
     cdef double tmp
-
     # Mass
     cdef mj
 
@@ -33,16 +32,16 @@ def acceleration(np.ndarray[np.float64_t, ndim=2] pos, np.ndarray[np.float64_t, 
                 continue
             
             # Calculate pairwise separation vectors
-            dx = pos[j,0] - pos[i,0]
-            dy = pos[j,1] - pos[i,1]
-            dz = pos[j,2] - pos[i,2]
+            dx = pos_view[j,0] - pos_view[i,0]
+            dy = pos_view[j,1] - pos_view[i,1]
+            dz = pos_view[j,2] - pos_view[i,2]
 
             # Vector magnitude of separation vector
             r = dx**2 + dy**2 + dz**2
             r = np.sqrt(r)
 
             # Mass
-            mj = mass[j]
+            mj = mass_view[j]
 
             tmp = G * mj * r**3
 
@@ -53,6 +52,8 @@ def acceleration(np.ndarray[np.float64_t, ndim=2] pos, np.ndarray[np.float64_t, 
 
     return np.asarray(acc)
 
+
+
 def euler_cromer(np.ndarray[np.float64_t, ndim=2] pos, np.ndarray[np.float64_t, ndim=2] vel, np.ndarray[np.float64_t, ndim=2] acc):
     cdef double dt = 1e-3 # Timestep
     # The Euler-Cromer integration method
@@ -62,6 +63,8 @@ def euler_cromer(np.ndarray[np.float64_t, ndim=2] pos, np.ndarray[np.float64_t, 
     pos += vel * dt
 
     return pos
+
+
 
 def leapfrog(np.ndarray[np.float64_t, ndim=2] pos, np.ndarray[np.float64_t, ndim=2] vel, np.ndarray[np.float64_t, ndim=2] acc, np.ndarray[np.float64_t, ndim=1] mass):
     cdef double dt = 1e-3 # Timestep
