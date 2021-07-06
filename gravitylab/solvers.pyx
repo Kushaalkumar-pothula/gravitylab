@@ -5,11 +5,14 @@ import numpy as np
 
 
 def separation(np.ndarray[np.float64_t, ndim=1] x1, np.ndarray[np.float64_t, ndim=1] x2):
-    cdef np.ndarray[np.float64_t, ndim=1] dx
-    cdef np.float64_t r
+    cdef np.float64_t [:] dx # Separation vector (1D memoryview)
+    cdef np.float64_t r # Separation vector magnitude
 
+    # Calculate separation and make it an array
     dx = x2 - x1
+    dx = np.asarray(dx)
 
+    # Calculate the magnitude of the separation 
     r = np.sqrt(np.dot(dx, dx))
 
     return r, dx
