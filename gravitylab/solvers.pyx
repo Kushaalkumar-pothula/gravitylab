@@ -4,6 +4,16 @@ cimport numpy as np
 import numpy as np
 
 
+def separation(np.ndarray[np.float64_t, ndim=1] x1, np.ndarray[np.float64_t, ndim=1] x2):
+    cdef np.ndarray[np.float64_t, ndim=1] dx
+    cdef np.float64_t r
+
+    dx = x2 - x1
+
+    r = np.sqrt(np.dot(dx, dx))
+
+    return r, dx
+
 def acceleration(np.ndarray[np.float64_t, ndim=2] pos, np.ndarray[np.float64_t, ndim=1] mass):
     cdef int N = pos.shape[0] # Number of bodies   
 
