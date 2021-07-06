@@ -39,3 +39,4 @@ plt.scatter(pos_arr[-1,0], pos_arr[-1,1], color='r')
 
 # Save figure
 plt.savefig("test.png")
+plt.show()
