@@ -24,7 +24,7 @@ acc = acceleration(pos, m)
 # Run simulation
 for _ in range(Nt):
     # Calculate positions and get new acceleration values
-    pos, acc = leapfrog(pos, vel, acc, m)
+    pos, acc = leapfrog(pos, vel, acc, m, dt)
 
     # Add positions to a list
     pos_lst.append(pos.copy())
