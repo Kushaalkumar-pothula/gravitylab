@@ -9,8 +9,6 @@ N = 20 # Number of bodies
 pos  = np.random.randn(N,3)
 vel  = np.random.randn(N,3)
 
-r, dx = separation(pos[0,:], pos[1,:])
-
 # Mass of all bodies = 1
 m = np.ones(N)
 
@@ -27,7 +25,6 @@ print("Separation test:")
 for _ in range(Nt):
     # Calculate positions and get new acceleration values
     pos, acc = leapfrog(pos, vel, acc, m)
-    print(r)
 
     # Add positions to a list
     pos_lst.append(pos.copy())

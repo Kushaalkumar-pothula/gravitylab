@@ -13,28 +13,29 @@ def separation(np.ndarray[np.float64_t, ndim=1] x1, np.ndarray[np.float64_t, ndi
 
     # Calculate separation and make it an array
     dx = x2 - x1
-    dx = np.asarray(dx)
+    dx = np.asarray(dx, dtype="float64")
 
     # Calculate the magnitude of the separation 
     r = np.sqrt(np.dot(dx, dx))
 
-    return r, np.asarray(dx)
+    return r, np.asarray(dx, dtype="float64")
 
 def acceleration(np.ndarray[np.float64_t, ndim=2] pos, np.ndarray[np.float64_t, ndim=1] mass):
+    
     cdef int N = pos.shape[0]
-    cdef np.float64_t [:,:] acc = np.zeros((N,3))
+
+    cdef np.float64_t [:,:] acc = np.zeros((N,3), dtype="float64")
 
     cdef np.float64_t r
-    cdef np.ndarray [np.float64_t, ndim=1] dx
-
-    cdef np.float64_t m1
-    cdef np.float64_t m2
-
     cdef np.float64_t r1
     cdef np.float64_t r2
 
+    cdef np.ndarray [np.float64_t, ndim=1] dx
     cdef np.ndarray [np.float64_t, ndim=1] dx1
     cdef np.ndarray [np.float64_t, ndim=1] dx2
+
+    cdef np.float64_t m1
+    cdef np.float64_t m2
 
     cdef int i
 
@@ -43,8 +44,15 @@ def acceleration(np.ndarray[np.float64_t, ndim=2] pos, np.ndarray[np.float64_t, 
     m1 = mass[0]
     m2 = mass[1]
     
-    acc[0,:] =  m2 / r**3 * dx[:]    # acceleration on body 1
-    acc[1,:] = -m1 / r**3 * dx[:]    # acceleration on body 2
+    # Acceleration on body 1
+    acc[0,0] =  m2 / r**3 * dx[0]
+    acc[0,1] =  m2 / r**3 * dx[1]
+    acc[0,2] =  m2 / r**3 * dx[2]
+
+    # Acceleration on body 2
+    acc[1,0] = -m1 / r**3 * dx[0]
+    acc[1,1] = -m1 / r**3 * dx[1]
+    acc[1,2] = -m1 / r**3 * dx[2]
 
     for i in range(2,N):
         # acceleration on test particles ONLY due to bodies 1 and 2
@@ -52,7 +60,10 @@ def acceleration(np.ndarray[np.float64_t, ndim=2] pos, np.ndarray[np.float64_t, 
         r1, dx1 = separation(pos[i,:],pos[0,:]) # test particle and body 1
         r2, dx2 = separation(pos[i,:],pos[1,:]) # test particle and body 2
 
-        acc[i,:] = m1 / r1**3 * dx1[:] + m2 / r2**3 * dx2[:]
+        acc[i,0] = m1 / r1**3 * dx1[0] + m2 / r2**3 * dx2[0]
+        acc[i,1] = m1 / r1**3 * dx1[1] + m2 / r2**3 * dx2[1]
+        acc[i,2] = m1 / r1**3 * dx1[2] + m2 / r2**3 * dx2[2]
+
     return np.asarray(acc)
 
 
