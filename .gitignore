@@ -3,3 +3,5 @@ gravitylab/*.c
 gravitylab/*.so
 build/
 *.png
+dist
+*.egg-info/
