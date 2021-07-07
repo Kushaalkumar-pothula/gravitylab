@@ -1,10 +1,12 @@
 from matplotlib import colors
-from solvers import acceleration, euler_cromer, leapfrog, separation
+from solvers import acceleration, leapfrog
 import numpy as np
 import matplotlib.pyplot as plt
 
 N = 20 # Number of bodies
-
+dt = 1e-3
+tStart = 0.0
+tEnd = 1.0
 # Generate random positions and velocity
 pos  = np.random.randn(N,3)
 vel  = np.random.randn(N,3)
@@ -13,7 +15,7 @@ vel  = np.random.randn(N,3)
 m = np.ones(N)
 
 # Number of timesteps (tEnd/dt, chosen arbitrarily here for testing)
-Nt = 1000
+Nt = tEnd/dt
 # List for holding positions
 pos_lst = []
 

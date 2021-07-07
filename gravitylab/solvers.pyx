@@ -55,8 +55,6 @@ def acceleration(np.ndarray[np.float64_t, ndim=2] pos, np.ndarray[np.float64_t, 
     acc[1,2] = -m1 / r**3 * dx[2]
 
     for i in range(2,N):
-        # acceleration on test particles ONLY due to bodies 1 and 2
-        # i.e. they do not feel each other
         r1, dx1 = separation(pos[i,:],pos[0,:]) # test particle and body 1
         r2, dx2 = separation(pos[i,:],pos[1,:]) # test particle and body 2
 
@@ -85,7 +83,7 @@ def euler_cromer(np.ndarray[np.float64_t, ndim=2] pos, np.ndarray[np.float64_t, 
 
 
 
-def leapfrog(np.ndarray[np.float64_t, ndim=2] pos, np.ndarray[np.float64_t, ndim=2] vel, np.ndarray[np.float64_t, ndim=2] acc, np.ndarray[np.float64_t, ndim=1] mass):
+def leapfrog(np.ndarray[np.float64_t, ndim=2] pos, np.ndarray[np.float64_t, ndim=2] vel, np.ndarray[np.float64_t, ndim=2] acc, np.ndarray[np.float64_t, ndim=1] mass, double dt):
     """
     Integrate using the Leapfrog method.
 
@@ -94,8 +92,6 @@ def leapfrog(np.ndarray[np.float64_t, ndim=2] pos, np.ndarray[np.float64_t, ndim
     a(t+1) = (G * m/((dx^2 + dy^2 + dz^2)^(3/2))) * dx * x
     v(t+1) = v(t+1/2) + a(t+1) x dt/2
     """
-    cdef double dt = 1e-3 # Timestep
-
     vel += acc * dt/2
     pos += vel * dt
     acc = acceleration(pos, mass)
