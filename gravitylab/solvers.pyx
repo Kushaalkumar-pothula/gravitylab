@@ -65,7 +65,7 @@ def acceleration(np.ndarray[np.float64_t, ndim=2] pos, np.ndarray[np.float64_t, 
     return np.asarray(acc)
 
 
-def euler_cromer(np.ndarray[np.float64_t, ndim=2] pos, np.ndarray[np.float64_t, ndim=2] vel, np.ndarray[np.float64_t, ndim=2] acc):
+def euler_cromer(np.ndarray[np.float64_t, ndim=2] pos, np.ndarray[np.float64_t, ndim=2] vel, np.ndarray[np.float64_t, ndim=2] acc, double dt):
     """
     Integrate using the Euler-Cromer method
 
@@ -73,9 +73,6 @@ def euler_cromer(np.ndarray[np.float64_t, ndim=2] pos, np.ndarray[np.float64_t, 
     x(t+1) = x(t) + v(t+1) x dt
 
     """
-    cdef double dt = 1e-3 # Timestep
-    
-
     vel += acc * dt
     pos += vel * dt
 
