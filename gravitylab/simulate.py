@@ -14,7 +14,7 @@ vel  = np.random.randn(N,3)
 m = np.ones(N)
 
 # Number of timesteps (tEnd/dt, chosen arbitrarily here for testing)
-Nt = tEnd/dt
+Nt = int(tEnd/dt)
 # List for holding positions
 pos_lst = []
 
