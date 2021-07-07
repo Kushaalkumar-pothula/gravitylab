@@ -2,16 +2,16 @@ from solvers import acceleration, leapfrog
 import numpy as np
 import matplotlib.pyplot as plt
 
-N = 20 # Number of bodies
+N = 2 # Number of bodies
 dt = 1e-3
 tStart = 0.0
-tEnd = 1.0
+tEnd = 10.0
 # Generate random positions and velocity
 pos  = np.random.randn(N,3)
 vel  = np.random.randn(N,3)
 
 # Mass of all bodies = 1
-m = np.ones(N)
+m = np.array([10,1e2])
 
 # Number of timesteps (tEnd/dt, chosen arbitrarily here for testing)
 Nt = int(tEnd/dt)
@@ -40,6 +40,4 @@ plt.scatter(pos_arr[:,0], pos_arr[:,1], color='blue', alpha = 0.3)
 plt.scatter(pos_arr[-1,0], pos_arr[-1,1], color='red')
 plt.scatter(pos_arr[0,0], pos_arr[1,1], color='green')
 
-# Save figure
-plt.savefig("test.png")
 plt.show()
