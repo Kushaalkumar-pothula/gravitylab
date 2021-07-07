@@ -18,59 +18,42 @@ def separation(np.ndarray[np.float64_t, ndim=1] x1, np.ndarray[np.float64_t, ndi
     # Calculate the magnitude of the separation 
     r = np.sqrt(np.dot(dx, dx))
 
-    return r, dx
+    return r, np.asarray(dx)
 
 def acceleration(np.ndarray[np.float64_t, ndim=2] pos, np.ndarray[np.float64_t, ndim=1] mass):
-    """
-    Calculate acceleration 
-    """
-    cdef int N = pos.shape[0] # Number of bodies   
+    cdef int N = pos.shape[0]
+    cdef np.float64_t [:,:] acc = np.zeros((N,3))
 
-    # Memoryview for acceleration
-    cdef np.float64_t [:,:] acc = np.zeros((N,3),dtype="float64")
-    cdef np.float64_t [:,:] pos_view = pos
-    cdef np.float64_t [:] mass_view = mass
+    cdef np.float64_t r
+    cdef np.ndarray [np.float64_t, ndim=1] dx
 
-    cdef double soft = 1e-4 # Softening length
-    cdef G = 6.673e-11 # Gravitational constant
-    # Pairwise separations
-    cdef double dx
-    cdef double dy
-    cdef double dz
-    # Total separation vectors
-    cdef double r
-    cdef double tmp
-    # Mass
-    cdef mj
+    cdef np.float64_t m1
+    cdef np.float64_t m2
 
-    # Acceleration calculation loop
-    for i in range(N):
-        for j in range(N):
-            # Remove gravitational self forces
-            if i==j:
-                continue
-            
-            # Calculate pairwise separation vectors
-            dx = pos_view[j,0] - pos_view[i,0]
-            dy = pos_view[j,1] - pos_view[i,1]
-            dz = pos_view[j,2] - pos_view[i,2]
+    cdef np.float64_t r1
+    cdef np.float64_t r2
 
-            # Vector magnitude of separation vector
-            r = dx**2 + dy**2 + dz**2
-            r = np.sqrt(r)
+    cdef np.ndarray [np.float64_t, ndim=1] dx1
+    cdef np.ndarray [np.float64_t, ndim=1] dx2
 
-            # Mass
-            mj = mass_view[j]
+    cdef int i
 
-            tmp = G * mj * r**3
+    r, dx = separation(pos[0,:], pos[1,:]) # separation between 1 and 2
 
-            # Calculate accelerations
-            acc[i,0] += tmp * dx
-            acc[i,1] += tmp * dy
-            acc[i,2] += tmp * dz
+    m1 = mass[0]
+    m2 = mass[1]
+    
+    acc[0,:] =  m2 / r**3 * dx[:]    # acceleration on body 1
+    acc[1,:] = -m1 / r**3 * dx[:]    # acceleration on body 2
 
+    for i in range(2,N):
+        # acceleration on test particles ONLY due to bodies 1 and 2
+        # i.e. they do not feel each other
+        r1, dx1 = separation(pos[i,:],pos[0,:]) # test particle and body 1
+        r2, dx2 = separation(pos[i,:],pos[1,:]) # test particle and body 2
+
+        acc[i,:] = m1 / r1**3 * dx1[:] + m2 / r2**3 * dx2[:]
     return np.asarray(acc)
-
 
 
 def euler_cromer(np.ndarray[np.float64_t, ndim=2] pos, np.ndarray[np.float64_t, ndim=2] vel, np.ndarray[np.float64_t, ndim=2] acc):
