@@ -1,5 +1,4 @@
-from distutils.core import setup
-from sys import version
+from setuptools import setup
 from Cython.Build import cythonize
 import numpy
 
