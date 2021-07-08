@@ -10,6 +10,7 @@ setup(
     author_email="kushaalkumar.astronomer@gmail.com",
     description="Astrophysical N-body simulator",
     long_description=open("README.md").read(),
+    long_description_content_type='text/markdown',
     ext_modules=cythonize("gravitylab/solvers.pyx"),
     include_dirs=[numpy.get_include()],
     install_requires = [
