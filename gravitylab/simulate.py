@@ -2,47 +2,58 @@ from solvers import acceleration, leapfrog
 import numpy as np
 import matplotlib.pyplot as plt
 
-N = 30 # Number of bodies
-dt = 1e-3
-tStart = 0.0
-tEnd = 10.0
-# Generate random positions and velocity
-pos  = np.random.randn(N,3)
-vel  = np.random.randn(N,3)
 
-# Mass of all bodies = 1
-m = np.array([10,1e2])
+class simulation():
+    """
+    Main simulation class
+    """
+    def __init__(self, N, dt, t, tEnd):
+        """
+        Initialize a simulation
+        """
+        self.N = N
+        self.dt = dt
+        self.t = t
+        self.tEnd = tEnd
 
-# Number of timesteps (tEnd/dt, chosen arbitrarily here for testing)
-Nt = int(tEnd/dt)
-# List for holding positions
-pos_lst = []
+    def initial_conditions(self, pos, vel, mass):
+        """
+        Initial conditions
+        """
+        self.pos = pos
+        self.vel = vel
+        self.mass = mass
 
-# Calculate initial acceleration
-acc = acceleration(pos, m)
+    def run(self):
+        """
+        Run simulation
+        """
+        Nt = int((self.tEnd - self.t)/self.dt)
+        pos_lst = []
 
-# Run simulation
-for _ in range(Nt):
-    # Calculate positions and get new acceleration values
-    pos, acc = leapfrog(pos, vel, acc, m, dt)
+        acc = acceleration(self.pos, self.mass)
 
-    # Add positions to a list
-    pos_lst.append(pos.copy())
+        for _ in range(Nt):
+            self.pos, acc = leapfrog(self.pos, self.vel, acc, self.mass, self.dt)
+            pos_lst.append(self.pos.copy())
 
-# Vertically stack all position arrays to get a matrix of all positions  
-pos_arr = np.vstack(pos_lst)
+        pos_arr = np.vstack(pos_lst)
 
-fig = plt.figure()
-ax = plt.axes(projection='3d')
+        return pos_arr
 
-ax.scatter3D(pos_arr[:,0], pos_arr[:,1], pos_arr[:,2], color = "skyblue")
-ax.scatter3D(pos_arr[0,0], pos_arr[0,1], pos_arr[0,2], color = "green")
-ax.scatter3D(pos_arr[-1,0], pos_arr[-1,1], pos_arr[-1,2], color = "red")
-# Plot all positions
-#plt.scatter(pos_arr[:,0], pos_arr[:,1], color='blue', alpha = 0.3)
+    def plot(self, positions, three_dimensional=True, color = "blue", save=False):
+        """
+        Plot simulation output
+        """
+        fig = plt.figure()
 
-# Plot the last two positions, to distinguish between attraction and repulsion
-#plt.scatter(pos_arr[-1,0], pos_arr[-1,1], color='red')
-#plt.scatter(pos_arr[0,0], pos_arr[1,1], color='green')
-
-plt.show()
+        if three_dimensional == True:
+            ax = plt.axes(projection='3d')
+            ax.scatter3D(positions[:,0], positions[:,1], positions[:,2], color = color)
+        else:
+            plt.scatter(positions[:,0], positions[:,1], positions[:,2], color = color)
+        
+        if save == True:
+            plt.savefig("gravitylab_output.png")
+        
+        plt.show()
