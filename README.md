@@ -4,8 +4,7 @@ An astrophysical N-body simulator.
 ## Installation
 
 ### Dependencies
-The following are required for the code to run:
-
+The following are required to run GravityLab:
 - Cython
 - NumPy
 - Matplotlib
