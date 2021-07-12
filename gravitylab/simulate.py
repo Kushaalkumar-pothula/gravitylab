@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-class simulation():
+class Simulation():
     """
     Main simulation class
     """
