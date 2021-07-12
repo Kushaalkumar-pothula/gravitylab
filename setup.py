@@ -4,7 +4,7 @@ import numpy
 
 setup(
     name="GravityLab",
-    version="0.1",
+    version="1.0",
     packages=["gravitylab"],
     author="Kushaal Kumar Pothula",
     author_email="kushaalkumar.astronomer@gmail.com",
