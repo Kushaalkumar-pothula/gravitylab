@@ -1,2 +1,6 @@
 [build-system]
 requires = ["setuptools", "numpy>=1.20.2", "matplotlib>=3.3.4", "Cython>=0.29.23"]
+
+[project]
+name = "GravityLab"
+readme = "README.md"
