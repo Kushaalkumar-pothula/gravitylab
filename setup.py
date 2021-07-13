@@ -4,7 +4,7 @@ import numpy
 
 setup(
     name="GravityLab",
-    version="1.0",
+    version="2.0",
     packages=["gravitylab"],
     license="MIT",
     author="Kushaal Kumar Pothula",
