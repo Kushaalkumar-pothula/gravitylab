@@ -1,6 +1,7 @@
 # GravityLab: Astrophysical N-body simulator.
 ![GitHub](https://img.shields.io/github/license/Kushaalkumar-pothula/gravitylab)
 ![PyPI](https://img.shields.io/pypi/v/GravityLab)
+![GitHub](https://img.shields.io/badge/hosted%20on-GitHub-black)
 
 An astrophysical N-body simulator.
 
