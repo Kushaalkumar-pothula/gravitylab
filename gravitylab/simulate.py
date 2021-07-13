@@ -97,6 +97,6 @@ class Simulation():
             ax = plt.axes(projection='3d')
             ax.scatter3D(self.pos[:,0], self.pos[:,1], self.pos[:,2], color=color, alpha=alpha)
             plt.show()
-        
-        plt.scatter(self.pos[:,0], self.pos[:,1], color=color, alpha=alpha)
-        plt.show()
+        else:
+            plt.scatter(self.pos[:,0], self.pos[:,1], color=color, alpha=alpha)
+            plt.show()
