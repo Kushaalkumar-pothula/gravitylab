@@ -83,7 +83,7 @@ class Simulation():
 
         return pos_arr
 
-    def plot(self, three_dimensional=False, color='blue', alpha = 0.6):
+    def plot(self, three_dimensional=False, start_pos=True, color='blue', alpha = 0.6):
         """
         Plot positions of bodies
 
@@ -97,8 +97,16 @@ class Simulation():
         if three_dimensional == True:
             fig = plt.figure()
             ax = plt.axes(projection='3d')
-            ax.scatter3D(self.pos[:,0], self.pos[:,1], self.pos[:,2], color=color, alpha=alpha)
+            if start_pos==True:
+                ax.scatter3D(self.pos[:,0], self.pos[:,1], self.pos[:,2], color=color, alpha=alpha)
+                ax.scatter3D(self.pos[0,0], self.pos[0,1], self.pos[0,2], color='red', alpha=alpha)
+            else:
+                ax.scatter3D(self.pos[:,0], self.pos[:,1], self.pos[:,2], color=color, alpha=alpha)
             plt.show()
         else:
-            plt.scatter(self.pos[:,0], self.pos[:,1], color=color, alpha=alpha)
+            if start_pos==True:
+                plt.scatter(self.pos[:,0], self.pos[:,1], color=color, alpha=alpha)
+                plt.scatter(self.pos[0,0], self.pos[0,1], color='red', alpha=alpha)
+            else:
+                plt.scatter(self.pos[:,0], self.pos[:,1], color=color, alpha=alpha) 
             plt.show()
