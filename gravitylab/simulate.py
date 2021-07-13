@@ -38,7 +38,22 @@ class Simulation():
             pos_lst.append(self.pos.copy())
         
         pos_arr = np.vstack(pos_lst)
+        self.pos = pos_arr
+
         if verbose==True:
                 print(pos_arr)
 
         return pos_arr
+
+    def plot(self, three_dimensional=False, color='blue'):
+        """
+        Plot positions
+        """
+        if three_dimensional == True:
+            fig = plt.figure()
+            ax = plt.axes(projection='3d')
+            ax.scatter3D(self.pos[:,0], self.pos[:,1], self.pos[:,2], color=color)
+            plt.show()
+        
+        plt.scatter(self.pos[:,0], self.pos[:,1], color=color)
+        plt.show()

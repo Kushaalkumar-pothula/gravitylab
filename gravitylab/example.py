@@ -16,10 +16,11 @@ mass = np.ones(N)
 tenbody = Simulation(N,dt,t,tEnd)
 tenbody.initial_conditions(pos,vel,mass)
 positions = tenbody.run()
+tenbody.plot()
 
-x = positions[:,0]
+"""x = positions[:,0]
 y = positions[:,1]
 plt.scatter(x,y,color='blue',alpha=0.3)
 plt.scatter(xi,yi,color='red')
-plt.show()
+plt.show()"""
 
