@@ -5,11 +5,33 @@ import matplotlib.pyplot as plt
 
 class Simulation():
     """
-    Main simulation class
+    Main simulation class for GravityLab
+
+    Attributes
+    ----------
+    N    : Number of bodies
+    dt   : Timestep
+    t    : Start time
+    tEnd : End time
+
+    Methods
+    -------
+    initial_conditions : Initial conditions for simulation
+    run                : Run simulation
+    plot               : Plot positions
+
     """
     def __init__(self, N, dt, t, tEnd):
         """
         Initialize a simulation
+
+        Parameters
+        ----------
+        N    : Number of bodies
+        dt   : Timestep
+        t    : Start time
+        tEnd : End time
+
         """
         self.N = N
         self.dt = dt
@@ -18,7 +40,14 @@ class Simulation():
 
     def initial_conditions(self, pos, vel, mass):
         """
-        Initial conditions
+        Initial conditions for a simulation
+
+        Parameters
+        ----------
+        pos : N x 3 array of positions
+        vel : N x 3 array of velocities
+        mass : N x 1 array of masses
+
         """
         self.pos = pos
         self.vel = vel
@@ -26,7 +55,16 @@ class Simulation():
 
     def run(self, verbose=False):
         """
-        Run simulation
+        Run the simulation
+
+        Parameters
+        ----------
+        verbose (optional) : Give more verbose output
+
+        Returns
+        -------
+        pos_arr : N x 3 array of positions
+        
         """
         Nt = int((self.tEnd - self.t)/self.dt)
         pos_lst = []
@@ -38,7 +76,29 @@ class Simulation():
             pos_lst.append(self.pos.copy())
         
         pos_arr = np.vstack(pos_lst)
+        self.pos = pos_arr
+
         if verbose==True:
-                print(pos_arr)
+            print(pos_arr)
 
         return pos_arr
+
+    def plot(self, three_dimensional=False, color='blue', alpha = 0.6):
+        """
+        Plot positions of bodies
+
+        Parameters
+        ----------
+        three_dimensional (optional) : 3D plotting
+        color (optional)             : Desired colour of markers
+        alpha (optional)             : Opacity of markers
+
+        """
+        if three_dimensional == True:
+            fig = plt.figure()
+            ax = plt.axes(projection='3d')
+            ax.scatter3D(self.pos[:,0], self.pos[:,1], self.pos[:,2], color=color, alpha=alpha)
+            plt.show()
+        else:
+            plt.scatter(self.pos[:,0], self.pos[:,1], color=color, alpha=alpha)
+            plt.show()
