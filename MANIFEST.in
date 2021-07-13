@@ -1,1 +1,2 @@
-recursive-include gravitylab/*.pyx
+global-include *.pyx
+global-exclude *.c
