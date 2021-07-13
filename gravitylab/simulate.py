@@ -47,6 +47,7 @@ class Simulation():
         pos : N x 3 array of positions
         vel : N x 3 array of velocities
         mass : N x 1 array of masses
+
         """
         self.pos = pos
         self.vel = vel
@@ -63,6 +64,7 @@ class Simulation():
         Returns
         -------
         pos_arr : N x 3 array of positions
+        
         """
         Nt = int((self.tEnd - self.t)/self.dt)
         pos_lst = []
@@ -77,7 +79,7 @@ class Simulation():
         self.pos = pos_arr
 
         if verbose==True:
-                print(pos_arr)
+            print(pos_arr)
 
         return pos_arr
 
