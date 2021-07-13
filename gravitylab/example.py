@@ -2,7 +2,7 @@ from simulate import Simulation
 import numpy as np
 import matplotlib.pyplot as plt
 
-N = 30
+N = 10
 dt = 1e-4
 t = 0.0
 tEnd = 1.0
@@ -16,7 +16,7 @@ mass = np.ones(N)
 tenbody = Simulation(N,dt,t,tEnd)
 tenbody.initial_conditions(pos,vel,mass)
 positions = tenbody.run()
-tenbody.plot()
+tenbody.plot(three_dimensional=True)
 
 """x = positions[:,0]
 y = positions[:,1]
