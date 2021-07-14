@@ -53,6 +53,7 @@ class Simulation():
         self.pos = pos
         self.vel = vel
         self.mass = mass
+        self.init_pos = pos
 
     def run(self, verbose=False):
         """
@@ -100,14 +101,14 @@ class Simulation():
             ax = plt.axes(projection='3d')
             if start_pos==True:
                 ax.scatter3D(self.pos[:,0], self.pos[:,1], self.pos[:,2], color=color, alpha=alpha)
-                ax.scatter3D(self.pos[0,0], self.pos[0,1], self.pos[0,2], color='red', alpha=alpha)
+                ax.scatter3D(self.init_pos[0,0], self.init_pos[0,1], self.init_pos[0,2], color='red', alpha=alpha)
             else:
                 ax.scatter3D(self.pos[:,0], self.pos[:,1], self.pos[:,2], color=color, alpha=alpha)
             plt.show()
         else:
             if start_pos==True:
                 plt.scatter(self.pos[:,0], self.pos[:,1], color=color, alpha=alpha)
-                plt.scatter(self.pos[0,0], self.pos[0,1], color='red', alpha=alpha)
+                plt.scatter(self.init_pos[0,0], self.init_pos[0,1], color='red')
             else:
                 plt.scatter(self.pos[:,0], self.pos[:,1], color=color, alpha=alpha) 
             plt.show()
