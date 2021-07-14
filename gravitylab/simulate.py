@@ -1,6 +1,7 @@
 from solvers import acceleration, leapfrog
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib import animation
 
 
 class Simulation():
@@ -110,3 +111,39 @@ class Simulation():
             else:
                 plt.scatter(self.pos[:,0], self.pos[:,1], color=color, alpha=alpha) 
             plt.show()
+    
+    def init_animation(self):
+        """
+        Initialize animation
+        """
+        fig, ax = plt.subplots()
+        scatterplot, = ax.scatter([], [])
+        scatterplot.set_data([], [])
+        self.scatterplot = scatterplot
+        return self.scatterplot,
+
+    def animate_func(self, i):
+        """
+        Animate positions
+        """
+        acc = acceleration(self.pos, self.mass)
+        self.pos, acc = leapfrog(self.pos, self.vel, acc, self.mass, self.dt)
+        scatterplot = self.scatterplot
+        for i in range(self.N):
+            scatterplot.set_data(self.pos[:,0], self.pos[:,1])
+
+        return self.scatterplot,
+    
+    def animate(self):
+        """
+        Animate
+        """
+        fig = plt.figure()
+        Nt = int((self.tEnd - self.t)/self.dt)
+        anim = animation.FuncAnimation(fig, self.animate_func, init_func=self.init_animation,
+                               frames=Nt, interval=10, blit=False)
+        plt.show()
+        return
+
+        
+        
