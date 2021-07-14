@@ -2,7 +2,7 @@ from simulate import Simulation
 import numpy as np
 import matplotlib.pyplot as plt
 
-N = 10
+N = 2
 dt = 1e-4
 t = 0.0
 tEnd = 1.0
