@@ -8,8 +8,6 @@ t = 0.0
 tEnd = 1.0
 
 pos  = np.random.uniform(size=(N,3))
-xi = pos[:,0]
-yi = pos[:,1]
 vel = np.random.uniform(size=(N,3))
 mass = np.ones(N)
 
