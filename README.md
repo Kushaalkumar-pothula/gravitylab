@@ -37,9 +37,17 @@ my_simulation.initial_conditions()
 
 And then run a simulation using the `.run()` method:
 ```python
+my_simulation.run()
+```
+You can also get the calculated positions returned by the above command:
+```python
 positions = my_simulation.run()
 ```
-The `positions` variable is a N x 3 array of positions which can be plotted.
+Next, you can create a plot of the evolution positions throughout the simulation:
+```python
+my_simulation.plot()
+```
+The `.plot()` method takes a many parameters, including 3D plotting.
 
 An example for running `GravityLab` simulations can be found in `gravitylab/example.py`:
 ```zsh
