@@ -1,10 +1,14 @@
 from setuptools import setup
-from Cython.Build import cythonize
+from setuptools import Extension
+from Cython.Distutils import build_ext
 import numpy
+
+extensions = [Extension("gravitylab.solvers", ["gravitylab/solvers.pyx"])]
+cmdclass = {"build_ext" : build_ext}
 
 setup(
     name="GravityLab",
-    version="2.1",
+    version="2.2.0",
     packages=["gravitylab"],
     license="MIT",
     author="Kushaal Kumar Pothula",
@@ -13,10 +17,11 @@ setup(
     description="Fast astrophysical N-body simulator",
     long_description=open("README.md").read(),
     long_description_content_type='text/markdown',
-    ext_modules=cythonize("gravitylab/solvers.pyx"),
+    cmdclass=cmdclass,
+    ext_modules=extensions,
     include_dirs=[numpy.get_include()],
     install_requires = [
-        'numpy>=1.20.2',
-        'matplotlib>=3.3.4'
+        'numpy>=1.20.0',
+        'matplotlib>=3.3.2'
     ]
 )
