@@ -1,3 +1,2 @@
 global-include *.pyx
-global-include *.so
 global-exclude *.c
