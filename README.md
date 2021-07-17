@@ -20,6 +20,7 @@ To install this code, run the following commands in your terminal:
 > git clone https://github.com/Kushaalkumar-pothula/gravitylab.git
 > cd gravitylab
 > python setup.py build_ext --inplace
+> python setup.py install
 ```
 
 ## Usage
