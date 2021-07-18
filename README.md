@@ -48,6 +48,7 @@ Or if you are inside the `gravitylab` directory:
 from simulate import Simulation
 my_simulation = Simulation()
 ```
+### Set up simulations
 
 Add initial conditions to a simulation instance:
 
@@ -188,7 +189,7 @@ class Simulation(builtins.object)
   ```
 </details>
 
-The same step is applicable for the methods of `Simulation()`.
+The same step is applicable for methods of `Simulation()`.
 
 ## Author
 This code was written by [Kushaal Kumar Pothula](https://kushaalkumarpothula.wordpress.com/). I wrote this code during my 10th grade while learning about numerical simulations during the summer as a learning project.
