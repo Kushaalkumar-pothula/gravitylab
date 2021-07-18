@@ -46,6 +46,7 @@ Or if you are inside the `gravitylab` directory:
 from simulate import Simulation
 my_simulation = Simulation()
 ```
+### Set up simulations
 
 Add initial conditions to a simulation instance:
 
