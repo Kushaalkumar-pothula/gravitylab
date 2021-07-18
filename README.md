@@ -2,6 +2,8 @@
 ![GitHub](https://img.shields.io/github/license/Kushaalkumar-pothula/gravitylab)
 ![PyPI](https://img.shields.io/pypi/v/GravityLab)
 
+<img src="./images/gravitylab_logo.png">
+
 A fast astrophysical N-body simulator.
 
 GravityLab is written in Python and Cython, with performance-critical parts implemented in Cython and the main simulation module written in Python. This makes GravityLab flexible and very fast. The core physics solvers are written in Cython and are optimized to make GravityLab fast. The ODEs governing motions of the bodies are solved using the Leapfrog integration scheme. The Python module is flexible and powerful, while keeping it simple for users to use it.
