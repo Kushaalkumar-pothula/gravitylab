@@ -2,7 +2,8 @@
 ![GitHub](https://img.shields.io/github/license/Kushaalkumar-pothula/gravitylab)
 ![PyPI](https://img.shields.io/pypi/v/GravityLab)
 
-<img src="./images/gravitylab_logo.png">
+#<img src="./images/gravitylab_logo.png">
+
 
 A fast astrophysical N-body simulator.
 
