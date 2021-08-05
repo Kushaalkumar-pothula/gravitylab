@@ -1,6 +1,7 @@
 gravitylab/__pycache__/
 gravitylab/*.c
 gravitylab/*.so
+gravitylab/darkmatter.py
 build/
 *.png
 dist
