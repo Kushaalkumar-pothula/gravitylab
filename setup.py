@@ -21,7 +21,7 @@ setup(
     ext_modules=extensions,
     include_dirs=[numpy.get_include()],
     install_requires = [
-        'numpy,
+        'numpy',
         'matplotlib'
     ]
 )
