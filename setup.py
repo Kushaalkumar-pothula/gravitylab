@@ -8,7 +8,7 @@ cmdclass = {"build_ext" : build_ext}
 
 setup(
     name="GravityLab",
-    version="3.0.0",
+    version="4.0.0",
     packages=["gravitylab"],
     license="MIT",
     author="Kushaal Kumar Pothula",
@@ -21,7 +21,7 @@ setup(
     ext_modules=extensions,
     include_dirs=[numpy.get_include()],
     install_requires = [
-        'numpy>=1.20.0',
-        'matplotlib>=3.3.2'
+        'numpy,
+        'matplotlib'
     ]
 )
