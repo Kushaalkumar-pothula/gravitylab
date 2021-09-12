@@ -8,7 +8,7 @@ cmdclass = {"build_ext" : build_ext}
 
 setup(
     name="GravityLab",
-    version="8.0.0",
+    version="9.1alpha",
     packages=["gravitylab"],
     license="MIT",
     author="Kushaal Kumar Pothula",
